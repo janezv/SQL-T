@@ -27,4 +27,21 @@ values
 (23434123, 'ap\lp', '0xFF', 4, 'Research and Development Engineer', '1995-2-3', 'F', '2012-3-5', 1),
 (23434123, 'ap\sl', '0xFF', 4, 'Research and Development Manager', '1995-2-3', 'F', '2012-3-5', 1)
 
-select * from Employee
+
+--******************************************************************************************************************
+-- Naloga
+
+--- conditional agregat function
+select count(case when Gender='M' then 1 end) as male, 
+	   count(case when Gender='F' then 1 end) as napak
+ from Employee group by JobTitle
+
+
+ --- dynamic query
+declare @dquery nvarchar(max)
+
+ set @dquery =  'select * from Employee where JobTitle LIKE @par1'
+
+ exec sp_executesql @dquery, N'@par1 nvarchar(100)', @par1='Research%'
+
+
