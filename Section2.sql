@@ -40,8 +40,8 @@ select count(case when Gender='M' then 1 end) as male,
  --- dynamic query
 declare @dquery nvarchar(max)
 
- set @dquery =  'select * from Employee where JobTitle LIKE @par1'
+ set @dquery =  'select * from Employee where JobTitle LIKE @par1 or JobTitle Like @par2'
 
- exec sp_executesql @dquery, N'@par1 nvarchar(100)', @par1='Research%'
+ exec sp_executesql @dquery, N'@par1 nvarchar(100), @par2 nvarchar(100)', @par1='Research%', @par2='Senior%'
 
 
